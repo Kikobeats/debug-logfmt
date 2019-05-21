@@ -1,5 +1,7 @@
 # debug-logfmt
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Kikobeats/debug-logfmt.svg)](https://greenkeeper.io/)
+
 <div align="center">
 	<img width="800" src="https://i.imgur.com/R0cd2Gj.png" >
 </div>
