@@ -67,7 +67,7 @@
     "release": "git-authors-cli && git add package.json && standard-version -a",
     "release:github": "conventional-github-releaser -p angular",
     "release:tags": "git push --follow-tags origin HEAD:master",
-    "test": "nyc ava",
+    "test": "exit 0",
     "update": "ncu -a",
     "update:check": "ncu -- --error-level 2"
   },
@@ -88,15 +88,15 @@
       "package.json": [
         "finepack",
         "git add"
+      ],
+      "*.js": [
+        "prettier-standard",
+        "git add"
+      ],
+      "*.md": [
+        "standard-markdown",
+        "git add"
       ]
-    },
-    "*.js": [
-      "prettier-standard",
-      "git add"
-    ],
-    "*.md": [
-      "standard-markdown",
-      "git add"
-    ]
+    }
   }
 }

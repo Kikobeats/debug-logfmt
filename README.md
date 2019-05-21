@@ -21,10 +21,10 @@ const debug = require('debug-logfmt')
 
 const log = debug('metascraper')
 
-log.debug('retry' { url: req.url })
+log.debug('retry', { url: req.url })
 log.info('done', { time: ms('1 hour') })
-log.warn('token expired' { timestamp: Date.now() })
-log.error('whoops' { message: error.message })
+log.warn('token expired', { timestamp: Date.now() })
+log.error('whoops', { message: error.message })
 ```
 
 ## API
