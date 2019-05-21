@@ -1,6 +1,8 @@
 # debug-logfmt
 
-![](https://i.imgur.com/R0cd2Gj.png)
+<div align="center">
+	<img width="800" src="https://i.imgur.com/R0cd2Gj.png" >
+</div>
 
 ## Highlights
 
