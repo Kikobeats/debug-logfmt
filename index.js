@@ -1,16 +1,12 @@
 'use strict'
 
-const logfmt = require('logfmt')
+const { encode } = require('@jclem/logfmt2')
 const debug = require('debug')
 
 const LEVELS = ['info', 'warn', 'error']
 
 const createLogger = log => (...args) =>
-  log(
-    args
-      .map(arg => (typeof arg === 'string' ? arg : logfmt.stringify(arg)))
-      .join(' ')
-  )
+  log(args.map(arg => (typeof arg === 'string' ? arg : encode(arg))).join(' '))
 
 module.exports = (env, { levels = LEVELS } = {}) => {
   const log = createLogger(debug(env))
