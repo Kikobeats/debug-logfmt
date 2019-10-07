@@ -1,7 +1,7 @@
 'use strict'
 
 const { encode } = require('@jclem/logfmt2')
-const debug = require('debug')
+const debug = require('debug-fabulous')(require('debug'))
 
 const LEVELS = ['info', 'warn', 'error']
 

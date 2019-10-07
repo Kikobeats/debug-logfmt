@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "@jclem/logfmt2": "~2.4.0",
-    "debug": "~4.1.1"
+    "debug-fabulous": "~2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
