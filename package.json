@@ -1,7 +1,7 @@
 {
   "name": "debug-logfmt",
   "description": "debug module using logfmt format",
-  "homepage": "https://nicedoc.io/Kikobeats/debug-logfmt",
+  "homepage": "https://github.com/Kikobeats/debug-logfmt",
   "version": "1.0.4",
   "main": "index.js",
   "author": {
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
+    "@ksmithut/prettier-standard": "latest",
     "ava": "latest",
     "ci-publish": "latest",
     "conventional-github-releaser": "latest",
@@ -40,11 +41,10 @@
     "finepack": "latest",
     "git-authors-cli": "latest",
     "git-dirty": "latest",
-    "simple-git-hooks": "latest",
     "nano-staged": "latest",
     "npm-check-updates": "latest",
     "nyc": "latest",
-    "prettier-standard": "latest",
+    "simple-git-hooks": "latest",
     "standard": "latest",
     "standard-markdown": "latest",
     "standard-version": "latest"
@@ -76,22 +76,22 @@
       "@commitlint/config-conventional"
     ]
   },
-  "simple-git-hooks": {
-  "commit-msg": "npx commitlint --edit",
-  "pre-commit": "npx nano-staged"
-},
   "nano-staged": {
+    "*.js": [
+      "git add",
+      "prettier-standard"
+    ],
+    "*.md": [
+      "git add",
+      "standard-markdown"
+    ],
     "package.json": [
       "finepack",
       "git add"
-    ],
-    "*.js": [
-      "prettier-standard",
-      "git add"
-    ],
-    "*.md": [
-      "standard-markdown",
-      "git add"
     ]
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npx commitlint --edit",
+    "pre-commit": "npx nano-staged"
   }
 }
