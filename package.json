@@ -27,8 +27,8 @@
     "winston"
   ],
   "dependencies": {
-    "@jclem/logfmt2": "~2.4.0",
-    "debug-fabulous": "~2.0.0"
+    "@jclem/logfmt2": "~2.4.3",
+    "debug-fabulous": "~2.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
