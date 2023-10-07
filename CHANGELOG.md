@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Kikobeats/debug-logfmt/compare/v1.0.4...v1.1.0) (2023-10-07)
+
+
+### Features
+
+* don't print diff information ([d874c16](https://github.com/Kikobeats/debug-logfmt/commit/d874c1643f2fb428b0fda59187765a0cc946188d))
+
 ### [1.0.4](https://github.com/Kikobeats/debug-logfmt/compare/v1.0.3...v1.0.4) (2019-10-07)
 
 ### [1.0.3](https://github.com/Kikobeats/debug-logfmt/compare/v1.0.2...v1.0.3) (2019-08-23)
