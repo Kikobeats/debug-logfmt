@@ -1,5 +1,9 @@
 'use strict'
 
+const timeSpan = require('@kikobeats/time-span')({
+  format: require('pretty-ms')
+})
+const { encode } = require('@jclem/logfmt2')
 const origDebug = require('debug')
 
 /**
@@ -19,20 +23,41 @@ if (process.env.DEBUG_COLORS === 'false') {
   }
 }
 
-const { encode } = require('@jclem/logfmt2')
-const debug = require('debug-fabulous')(origDebug)
+const createDebug = require('debug-fabulous')(origDebug)
 
 const LEVELS = ['info', 'warn', 'error']
 
 const createLogger =
   log =>
-  (...args) =>
-    log(
-      args.map(arg => (typeof arg === 'string' ? arg : encode(arg))).join(' ')
-    )
+    (...args) =>
+      log(
+        args.map(arg => (typeof arg === 'string' ? arg : encode(arg))).join(' ')
+      )
 
 module.exports = (env, { levels = LEVELS } = {}) => {
-  const log = createLogger(debug(env))
-  levels.forEach(level => (log[level] = createLogger(debug(`${env}:${level}`))))
-  return log
+  const debug = createLogger(createDebug(env))
+  levels.forEach(
+    level => (debug[level] = createLogger(createDebug(`${env}:${level}`)))
+  )
+
+  debug.duration = (...args) => {
+    const duration = timeSpan()
+
+    const create =
+      type =>
+        (...opts) => {
+          ;(type ? debug[type] : debug)(...args, ...opts, {
+            duration: duration()
+          })
+          return true
+        }
+
+    const fn = create()
+    fn.error = create('error')
+    fn.info = create('info')
+
+    return fn
+  }
+
+  return debug
 }
