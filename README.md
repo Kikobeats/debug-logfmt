@@ -7,7 +7,7 @@
 ## Highlights
 
 - Based on [`debug`](https://www.npmjs.com/package/debug), use `DEBUG` for enable/disable logging.
-- Expose `info`, `warn` and `error` logging levels.
+- Expose `info`, `warn` and `error` logging levels, inspired from [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424).
 - Format messages using Heroku [logfmt](https://brandur.org/logfmt) syntax.
 
 ## Install
