@@ -29,8 +29,8 @@
   "dependencies": {
     "@jclem/logfmt2": "~2.4.3",
     "@kikobeats/time-span": "~1.0.2",
-    "debug-fabulous": "~2.0.2",
-    "pretty-ms": "~7.0.1"
+    "@lukeed/ms": "~2.0.2",
+    "debug-fabulous": "~2.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
@@ -38,11 +38,12 @@
     "@ksmithut/prettier-standard": "latest",
     "ava": "latest",
     "ci-publish": "latest",
-    "conventional-github-releaser": "latest",
     "coveralls": "latest",
+    "debug": "latest",
     "finepack": "latest",
     "git-authors-cli": "latest",
     "git-dirty": "latest",
+    "github-generate-release": "latest",
     "nano-staged": "latest",
     "npm-check-updates": "latest",
     "nyc": "latest",
@@ -66,7 +67,7 @@
     "pretest": "npm run lint",
     "pretty": "prettier-standard index.js {core,test,bin,scripts}/**/*.js --single-quote --print-width 100",
     "release": "git-authors-cli && git add package.json && standard-version -a",
-    "release:github": "conventional-github-releaser -p angular",
+    "release:github": "github-generate-release",
     "release:tags": "git push --follow-tags origin HEAD:master",
     "test": "exit 0",
     "update": "ncu -a",

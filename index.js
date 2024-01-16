@@ -1,10 +1,12 @@
 'use strict'
 
-const timeSpan = require('@kikobeats/time-span')({
-  format: require('pretty-ms')
-})
 const { encode } = require('@jclem/logfmt2')
+const { format } = require('@lukeed/ms')
 const origDebug = require('debug')
+
+const timeSpan = require('@kikobeats/time-span')({
+  format: n => format(Math.round(n))
+})
 
 /**
  * This methods override the default `formatArgs` to don't print diff information.
@@ -29,10 +31,10 @@ const LEVELS = ['info', 'warn', 'error']
 
 const createLogger =
   log =>
-    (...args) =>
-      log(
-        args.map(arg => (typeof arg === 'string' ? arg : encode(arg))).join(' ')
-      )
+  (...args) =>
+    log(
+      args.map(arg => (typeof arg === 'string' ? arg : encode(arg))).join(' ')
+    )
 
 module.exports = (env, { levels = LEVELS } = {}) => {
   const debug = createLogger(createDebug(env))
@@ -45,12 +47,12 @@ module.exports = (env, { levels = LEVELS } = {}) => {
 
     const create =
       type =>
-        (...opts) => {
-          ;(type ? debug[type] : debug)(...args, ...opts, {
-            duration: duration()
-          })
-          return true
-        }
+      (...opts) => {
+        ;(type ? debug[type] : debug)(...args, ...opts, {
+          duration: duration()
+        })
+        return true
+      }
 
     const fn = create()
     fn.error = create('error')
