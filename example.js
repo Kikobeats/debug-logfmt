@@ -12,3 +12,4 @@ log.error('whoops', { message: 'expected `number`, got `NaN`' })
 
 const duration = log.duration()
 setTimeout(1001).then(() => duration.info())
+setTimeout(1100).then(() => duration.info())
