@@ -30,7 +30,7 @@
     "@jclem/logfmt2": "~2.4.3",
     "@kikobeats/time-span": "~1.0.2",
     "debug-fabulous": "~2.0.2",
-    "pretty-ms": "~7.0.1"
+    "pretty-ms": "~9.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
