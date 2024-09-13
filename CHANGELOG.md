@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/Kikobeats/debug-logfmt/compare/v1.2.2...v1.2.3) (2024-09-13)
+
+
+### Bug Fixes
+
+* pin version ([a41491f](https://github.com/Kikobeats/debug-logfmt/commit/a41491feee8961907d2c2286d62f5128ac17ce81))
+
 ### [1.2.2](https://github.com/Kikobeats/debug-logfmt/compare/v1.2.1...v1.2.2) (2024-01-16)
 
 ### [1.2.1](https://github.com/Kikobeats/debug-logfmt/compare/v1.2.0...v1.2.1) (2024-01-16)
