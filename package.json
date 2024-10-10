@@ -48,7 +48,6 @@
     "nyc": "latest",
     "simple-git-hooks": "latest",
     "standard": "latest",
-    "standard-markdown": "latest",
     "standard-version": "latest"
   },
   "engines": {
@@ -87,8 +86,7 @@
       "prettier-standard"
     ],
     "*.md": [
-      "git add",
-      "standard-markdown"
+      "git add"
     ],
     "package.json": [
       "finepack",

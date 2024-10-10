@@ -6,9 +6,12 @@
 
 ## Highlights
 
-- Based on [`debug`](https://www.npmjs.com/package/debug), use `DEBUG` for enable/disable logging.
-- Expose `info`, `warn` and `error` logging levels, inspired from [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424).
-- Format messages using Heroku [logfmt](https://brandur.org/logfmt) syntax.
+- Based on the popular [`debug`](https://www.npmjs.com/package/debug) module.
+- Lazy level evaluation used logs levels.
+- Level support: `info`, `warn` & `error` based from [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424).
+- Message formatting Heroku [logfmt](https://brandur.org/logfmt) syntax.
+- Colorized output via [`DEBUG_COLORS`](https://github.com/debug-js/debug#environment-variables) by default.
+- [`debug.duration`](#measurement) for measurement.
 
 ## Install
 
@@ -16,15 +19,38 @@
 $ npm install debug-logfmt --save
 ```
 
+## Usage
+
+### Multiple levels
+
+Given a code like this one:
+
 ```js
-const debug = require('debug-logfmt')
+const debug = require('debug-logfmt')('metascraper')
 
-const log = debug('metascraper')
+debug('retry', { url: 'https://kikobeats.com' })
+debug.info('done', { time: Date.now() })
+debug.warn('token expired', { timestamp: Date.now() })
+debug.error('whoops', { message: 'expected `number`, got `NaN`' })
+```
 
-log.debug('retry', { url: req.url })
-log.info('done', { time: ms('1 hour') })
-log.warn('token expired', { timestamp: Date.now() })
-log.error('whoops', { message: error.message })
+You can:
+- Allow all the levels: `DEBUG=debug-logfmt*`
+- Discard specific levels: `DEBUG="*,-metascraper:info*" node example.js`
+
+### Measurement
+
+Sometimes you need to log the duration of a function:
+
+```js
+const { setTimeout } = require('timers/promises')
+
+const debug = require('debug-logfmt')('metascraper')
+
+const duration = debug.duration()
+
+setTimeout(1001).then(() => duration.error('timeout!'))
+setTimeout(1100).then(() => duration.info('success'))
 ```
 
 ## API
@@ -46,6 +72,16 @@ Type: `array`<br>
 Default: `['debug', 'info', 'warn', 'error']`
 
 The log levels available.
+
+### debug.duration([...args])
+
+It returns a function will print the duration in the next call.
+
+```js
+const duration = debug.duration('query')
+const result = await db.query(query)
+duration(result)
+```
 
 ## License
 

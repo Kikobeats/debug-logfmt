@@ -1,15 +1,15 @@
 'use strict'
 
 const { setTimeout } = require('timers/promises')
-const debug = require('.')
 
-const log = debug('metascraper')
+const debug = require('.')('metascraper')
 
-log('retry', { url: 'https://kikobeats.com' })
-log.info('done', { time: Date.now() })
-log.warn('token expired', { timestamp: Date.now() })
-log.error('whoops', { message: 'expected `number`, got `NaN`' })
+debug('retry', { url: 'https://kikobeats.com' })
+debug.info('done', { time: Date.now() })
+debug.warn('token expired', { timestamp: Date.now() })
+debug.error('whoops', { message: 'expected `number`, got `NaN`' })
 
-const duration = log.duration()
-setTimeout(1001).then(() => duration.info())
-setTimeout(1100).then(() => duration.info())
+const duration = debug.duration()
+
+setTimeout(1001).then(() => duration.error('timeout!'))
+setTimeout(1100).then(() => duration.info('success'))
