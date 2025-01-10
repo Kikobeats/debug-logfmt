@@ -48,7 +48,7 @@
     "standard": "latest",
     "standard-markdown": "latest",
     "standard-version": "latest",
-    "strip-ansi": "6",
+    "strip-ansi": "7",
     "tinyspawn": "latest"
   },
   "engines": {
