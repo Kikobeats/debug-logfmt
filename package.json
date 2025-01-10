@@ -37,17 +37,15 @@
     "@commitlint/config-conventional": "latest",
     "@ksmithut/prettier-standard": "latest",
     "ava": "latest",
+    "c8": "latest",
     "ci-publish": "latest",
-    "coveralls": "latest",
-    "debug": "latest",
     "finepack": "latest",
     "git-authors-cli": "latest",
-    "git-dirty": "latest",
     "github-generate-release": "latest",
     "nano-staged": "latest",
-    "nyc": "latest",
     "simple-git-hooks": "latest",
     "standard": "latest",
+    "standard-markdown": "latest",
     "standard-version": "latest",
     "strip-ansi": "6",
     "tinyspawn": "latest"
@@ -60,16 +58,16 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
+    "contributors": "(npx git-authors-cli && npx finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard",
-    "postrelease": "npm run release:tags && npm run release:github && ci-publish",
+    "postrelease": "npm run release:tags && npm run release:github && (ci-publish || npm publish --access=public)",
     "pretest": "npm run lint",
     "pretty": "prettier-standard index.js {core,test,bin,scripts}/**/*.js --single-quote --print-width 100",
-    "release": "git-authors-cli && git add package.json && standard-version -a",
+    "release": "standard-version -a",
     "release:github": "github-generate-release",
     "release:tags": "git push --follow-tags origin HEAD:master",
-    "test": "ava",
-    "update": "ncu -a"
+    "test": "c8 ava"
   },
   "license": "MIT",
   "commitlint": {
@@ -84,15 +82,14 @@
   },
   "nano-staged": {
     "*.js": [
-      "git add",
-      "prettier-standard"
+      "prettier-standard",
+      "standard --fix"
     ],
     "*.md": [
-      "git add"
+      "standard-markdown"
     ],
     "package.json": [
-      "finepack",
-      "git add"
+      "finepack"
     ]
   },
   "simple-git-hooks": {
