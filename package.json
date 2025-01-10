@@ -48,7 +48,9 @@
     "nyc": "latest",
     "simple-git-hooks": "latest",
     "standard": "latest",
-    "standard-version": "latest"
+    "standard-version": "latest",
+    "strip-ansi": "6",
+    "tinyspawn": "latest"
   },
   "engines": {
     "node": ">= 8"
@@ -59,14 +61,14 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "standard-markdown README.md && standard",
+    "lint": "standard",
     "postrelease": "npm run release:tags && npm run release:github && ci-publish",
     "pretest": "npm run lint",
     "pretty": "prettier-standard index.js {core,test,bin,scripts}/**/*.js --single-quote --print-width 100",
     "release": "git-authors-cli && git add package.json && standard-version -a",
     "release:github": "github-generate-release",
     "release:tags": "git push --follow-tags origin HEAD:master",
-    "test": "exit 0",
+    "test": "ava",
     "update": "ncu -a"
   },
   "license": "MIT",
