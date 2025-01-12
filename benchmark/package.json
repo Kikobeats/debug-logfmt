@@ -1,0 +1,7 @@
+{
+  "name": "@debug-logfmt/benchmark",
+  "version": "1.0.0",
+  "dependencies": {
+    "tinybench": "latest"
+  }
+}

@@ -3,7 +3,7 @@
   "description": "debug module using logfmt format",
   "homepage": "https://github.com/Kikobeats/debug-logfmt",
   "version": "1.2.4",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
     "name": "Kiko Beats",
@@ -28,7 +28,6 @@
     "winston"
   ],
   "dependencies": {
-    "@jclem/logfmt2": "~2.4.3",
     "@kikobeats/time-span": "~1.0.5",
     "debug-fabulous": "~2.0.8",
     "pretty-ms": "~7.0.1"
