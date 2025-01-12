@@ -2,7 +2,7 @@
   "name": "debug-logfmt",
   "description": "debug module using logfmt format",
   "homepage": "https://github.com/Kikobeats/debug-logfmt",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "src/index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
