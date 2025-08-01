@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.4.0 (2025-08-01)
+
+
+### Features
+
+* add types ([c7bddba](https://github.com/Kikobeats/debug-logfmt/commit/c7bddbaed215472e466fd277471e05862e823846))
+
 ## 1.3.0 (2025-08-01)
 
 
