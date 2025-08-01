@@ -4,6 +4,10 @@
   "homepage": "https://github.com/Kikobeats/debug-logfmt",
   "version": "1.2.6",
   "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./encode": "./src/encode.js"
+  },
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
     "name": "Kiko Beats",
