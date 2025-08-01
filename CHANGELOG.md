@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.0 (2025-08-01)
+
+
+### Features
+
+* expose encode ([c74bc41](https://github.com/Kikobeats/debug-logfmt/commit/c74bc413fd0b773f672eb9d0baadee6fc2d2b32e))
+
 ### 1.2.6 (2025-07-03)
 
 ### 1.2.5 (2025-01-12)
