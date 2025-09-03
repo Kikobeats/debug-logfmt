@@ -2,7 +2,7 @@
   "name": "debug-logfmt",
   "description": "debug module using logfmt format",
   "homepage": "https://github.com/Kikobeats/debug-logfmt",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "types": "./src/index.d.ts",
   "main": "src/index.js",
   "exports": {
