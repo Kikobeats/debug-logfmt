@@ -23,7 +23,7 @@ if (process.env.DEBUG_COLORS === 'false') {
   }
 }
 
-const createDebug = require('debug-fabulous')(origDebug)
+const createDebug = require('./lazy')(origDebug)
 
 const LEVELS = ['info', 'warn', 'error']
 

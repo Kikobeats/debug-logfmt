@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "@kikobeats/time-span": "~1.0.5",
-    "debug-fabulous": "~2.0.8",
+    "null-prototype-object": "~1.2.2",
     "pretty-ms": "~7.0.1"
   },
   "devDependencies": {
