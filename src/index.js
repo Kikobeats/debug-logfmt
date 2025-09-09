@@ -30,7 +30,12 @@ const LEVELS = ['info', 'warn', 'error']
 const createLogger =
   log =>
     (...args) =>
-      log(args.map(arg => (typeof arg === 'string' ? arg : encode(arg))).join(' '))
+      log(
+        args
+          .map(arg => (typeof arg === 'string' ? arg : encode(arg)))
+          .filter(Boolean)
+          .join(' ')
+      )
 
 module.exports = (env, { levels = LEVELS } = {}) => {
   const debug = createLogger(createDebug(env))

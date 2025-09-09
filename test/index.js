@@ -19,3 +19,14 @@ test('undefined is serialized as empty string', async t => {
 
   t.is(stripAnsi(stderr), 'test value=undefined')
 })
+
+test('deleted falsy valuesnot passed as object', async t => {
+  const { stderr } = await $(
+    'node',
+    ['-e', "require('.')('test')({ foo:'bar'}, null, '', undefined)"],
+    {
+      env: { ...process.env, DEBUG: 'test' }
+    }
+  )
+  t.is(stripAnsi(stderr), 'test foo=bar')
+})
