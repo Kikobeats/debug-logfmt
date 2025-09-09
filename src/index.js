@@ -31,10 +31,11 @@ const createLogger =
   log =>
     (...args) =>
       log(
-        args
-          .map(arg => (typeof arg === 'string' ? arg : encode(arg)))
-          .filter(Boolean)
-          .join(' ')
+        args.reduce((result, arg, index) => {
+          const encoded = typeof arg === 'string' ? arg : encode(arg)
+          if (!encoded) return result
+          return result + (index > 0 ? ' ' : '') + encoded
+        }, '')
       )
 
 module.exports = (env, { levels = LEVELS } = {}) => {
