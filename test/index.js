@@ -21,12 +21,20 @@ test('undefined is serialized as empty string', async t => {
 })
 
 test('deleted falsy valuesnot passed as object', async t => {
-  const { stderr } = await $(
-    'node',
-    ['-e', "require('.')('test')({ foo:'bar'}, null, '', undefined)"],
-    {
+  {
+    const { stderr } = await $(
+      'node',
+      ['-e', "require('.')('test')({ foo:'bar'}, null, '', undefined)"],
+      {
+        env: { ...process.env, DEBUG: 'test' }
+      }
+    )
+    t.is(stripAnsi(stderr), 'test foo=bar')
+  }
+  {
+    const { stderr } = await $('node', ['-e', "require('.')('test')({ foo:'bar'}, false)"], {
       env: { ...process.env, DEBUG: 'test' }
-    }
-  )
-  t.is(stripAnsi(stderr), 'test foo=bar')
+    })
+    t.is(stripAnsi(stderr), 'test foo=bar')
+  }
 })
