@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.8](https://github.com/Kikobeats/debug-logfmt/compare/v1.4.7...v1.4.8) (2026-02-27)
+
 ### 1.4.7 (2025-11-21)
 
 ### 1.4.6 (2025-10-14)
