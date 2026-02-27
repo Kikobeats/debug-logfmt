@@ -27,36 +27,51 @@ const createDebug = require('./lazy')(origDebug)
 
 const LEVELS = ['info', 'warn', 'error']
 
-const createLogger =
-  log =>
-    (...args) =>
-      log(
-        args.reduce((result, arg, index) => {
-          const encoded = typeof arg === 'string' ? arg : encode(arg)
-          if (!encoded) return result
-          return result + (index > 0 ? ' ' : '') + encoded
-        }, '')
-      )
+const createLogger = log => {
+  const logger = (...args) => {
+    if (!log.enabled) return
+
+    log(
+      args.reduce((result, arg, index) => {
+        const encoded = typeof arg === 'string' ? arg : encode(arg)
+        if (!encoded) return result
+        return result + (index > 0 ? ' ' : '') + encoded
+      }, '')
+    )
+  }
+
+  Object.defineProperty(logger, 'enabled', {
+    enumerable: true,
+    get: () => log.enabled
+  })
+
+  return logger
+}
 
 module.exports = (env, { levels = LEVELS } = {}) => {
   const debug = createLogger(createDebug(env))
   levels.forEach(level => (debug[level] = createLogger(createDebug(`${env}:${level}`))))
 
   debug.duration = (...args) => {
-    const duration = timeSpan()
+    let duration = debug.enabled ? timeSpan() : undefined
 
     const create =
-      type =>
+      logger =>
         (...opts) => {
-          ;(type ? debug[type] : debug)(...args, ...opts, {
+          if (!logger.enabled) return true
+
+          duration = duration || timeSpan()
+
+          logger(...args, ...opts, {
             duration: duration()
           })
+
           return true
         }
 
-    const fn = create()
-    fn.error = create('error')
-    fn.info = create('info')
+    const fn = create(debug)
+    fn.error = create(debug.error)
+    fn.info = create(debug.info)
 
     return fn
   }
