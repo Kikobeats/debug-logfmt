@@ -78,3 +78,5 @@ module.exports = (env, { levels = LEVELS } = {}) => {
 
   return debug
 }
+
+module.exports.timeSpan = timeSpan
