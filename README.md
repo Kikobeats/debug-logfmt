@@ -16,7 +16,7 @@
 ## Install
 
 ```bash
-$ npm install debug-logfmt --save
+$ npm install debug debug-logfmt --save
 ```
 
 ## Usage
