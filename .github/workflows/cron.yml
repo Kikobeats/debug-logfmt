@@ -22,7 +22,8 @@
 #         uses: pnpm/action-setup@v4
 #         with:
 #           version: latest
-#           run_install: true
+#       - name: Install
+        run: pnpm install --dangerously-allow-all-builds
 #         run: npm install --no-package-lock
 #       - name: Cron
 #         run: |
