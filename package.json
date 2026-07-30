@@ -2,7 +2,7 @@
   "name": "debug-logfmt",
   "description": "Drop-in debug logger that emits logfmt key=value lines for structured Heroku-style logs.",
   "homepage": "https://github.com/Kikobeats/debug-logfmt",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "types": "./src/index.d.ts",
   "main": "src/index.js",
   "exports": {
