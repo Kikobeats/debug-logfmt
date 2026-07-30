@@ -1,6 +1,6 @@
 {
   "name": "debug-logfmt",
-  "description": "debug module using logfmt format",
+  "description": "Drop-in debug logger that emits logfmt key=value lines for structured Heroku-style logs.",
   "homepage": "https://github.com/Kikobeats/debug-logfmt",
   "version": "1.4.13",
   "types": "./src/index.d.ts",
@@ -29,13 +29,15 @@
     "url": "https://github.com/Kikobeats/debug-logfmt/issues"
   },
   "keywords": [
+    "bunyan",
     "debug",
-    "debugger",
-    "herokubunyan",
-    "log",
+    "format",
+    "heroku",
+    "key-value",
     "logfmt",
     "logger",
     "logging",
+    "structured",
     "winston"
   ],
   "dependencies": {
