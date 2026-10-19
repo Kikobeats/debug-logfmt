@@ -43,7 +43,7 @@
   "dependencies": {
     "@kikobeats/time-span": "~1.0.5",
     "null-prototype-object": "~1.2.2",
-    "pretty-ms": "~7.0.1"
+    "pretty-ms": "~10.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
