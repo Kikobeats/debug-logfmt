@@ -92,3 +92,80 @@ test('duration should not create timer when logger is disabled', async t => {
 
   t.is(stdout, '0')
 })
+
+test('disabled duration returns true from every level without writing', async t => {
+  const { stdout, stderr } = await $(
+    'node',
+    [
+      '-e',
+      `
+      const duration = require('.')('test').duration('query')
+      process.stdout.write([duration('done'), duration.info('done'), duration.error('fail')].join())
+    `
+    ],
+    {
+      env: { ...process.env, DEBUG: '' }
+    }
+  )
+
+  t.is(stdout, 'true,true,true')
+  t.is(stderr, '')
+})
+
+test('duration logs a level enabled on its own', async t => {
+  const { stderr } = await $(
+    'node',
+    [
+      '-e',
+      `
+      const duration = require('.')('test').duration('query')
+      duration('done')
+      duration.error('fail')
+    `
+    ],
+    {
+      env: { ...process.env, DEBUG: 'test:error' }
+    }
+  )
+
+  t.regex(stripAnsi(stderr), /^test:error query fail duration=\S+$/)
+})
+
+test('duration follows namespaces enabled after the first call', async t => {
+  const { stderr } = await $(
+    'node',
+    [
+      '-e',
+      `
+      const debug = require('.')('test')
+      debug.duration('query')('skipped')
+      require('debug').enable('test')
+      debug.duration('query')('done')
+    `
+    ],
+    {
+      env: { ...process.env, DEBUG: '' }
+    }
+  )
+
+  t.regex(stripAnsi(stderr), /^test query done duration=\S+$/)
+})
+
+test('duration logs with custom levels', async t => {
+  const { stdout, stderr } = await $(
+    'node',
+    [
+      '-e',
+      `
+      const debug = require('.')('test', { levels: ['warn'] })
+      process.stdout.write(String(debug.duration('query')('done')))
+    `
+    ],
+    {
+      env: { ...process.env, DEBUG: 'test' }
+    }
+  )
+
+  t.is(stdout, 'true')
+  t.regex(stripAnsi(stderr), /^test query done duration=\S+$/)
+})

@@ -27,6 +27,24 @@ const createDebug = require('./lazy')(origDebug)
 
 const LEVELS = ['info', 'warn', 'error']
 
+const disabledDuration = () => true
+disabledDuration.error = disabledDuration
+disabledDuration.info = disabledDuration
+
+const tracksNamespaces = 'namespaces' in origDebug
+
+const memoizeByNamespaces = compute => {
+  let namespaces = {}
+  let value
+  return () => {
+    if (origDebug.namespaces !== namespaces) {
+      namespaces = origDebug.namespaces
+      value = compute()
+    }
+    return value
+  }
+}
+
 const createLogger = log => {
   const logger = (...args) => {
     if (!log.enabled) return
@@ -51,8 +69,14 @@ const createLogger = log => {
 module.exports = (env, { levels = LEVELS } = {}) => {
   const debug = createLogger(createDebug(env))
   levels.forEach(level => (debug[level] = createLogger(createDebug(`${env}:${level}`))))
+  const isDisabled =
+    tracksNamespaces && levels.includes('error') && levels.includes('info')
+      ? memoizeByNamespaces(() => !debug.enabled && !debug.error.enabled && !debug.info.enabled)
+      : () => false
 
   debug.duration = (...args) => {
+    if (isDisabled()) return disabledDuration
+
     let duration = debug.enabled ? timeSpan() : undefined
 
     const create =
