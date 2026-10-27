@@ -169,3 +169,31 @@ test('duration logs with custom levels', async t => {
   t.is(stdout, 'true')
   t.regex(stripAnsi(stderr), /^test query done duration=\S+$/)
 })
+
+test('logger follows namespaces enabled and disabled after creation', async t => {
+  const { stdout, stderr } = await $(
+    'node',
+    [
+      '-e',
+      `
+      const debug = require('debug')
+      const log = require('.')('test')
+      const states = [log.enabled]
+      log('skipped')
+      debug.enable('test')
+      states.push(log.enabled)
+      log('shown')
+      debug.disable()
+      states.push(log.enabled)
+      log('skipped')
+      process.stdout.write(states.join())
+    `
+    ],
+    {
+      env: { ...process.env, DEBUG: '' }
+    }
+  )
+
+  t.is(stdout, 'false,true,false')
+  t.is(stripAnsi(stderr), 'test shown')
+})

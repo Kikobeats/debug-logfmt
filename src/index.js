@@ -46,8 +46,10 @@ const memoizeByNamespaces = compute => {
 }
 
 const createLogger = log => {
+  const isEnabled = tracksNamespaces ? memoizeByNamespaces(() => log.enabled) : () => log.enabled
+
   const logger = (...args) => {
-    if (!log.enabled) return
+    if (!isEnabled()) return
 
     log(
       args.reduce((result, arg, index) => {
@@ -60,7 +62,7 @@ const createLogger = log => {
 
   Object.defineProperty(logger, 'enabled', {
     enumerable: true,
-    get: () => log.enabled
+    get: isEnabled
   })
 
   return logger
