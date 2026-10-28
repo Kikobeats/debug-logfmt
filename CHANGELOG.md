@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.4.20 (2026-10-28)
+
+
+### Bug Fixes
+
+* declare the real minimum Node.js version ([#29](https://github.com/Kikobeats/debug-logfmt/issues/29)) ([1e016f5](https://github.com/Kikobeats/debug-logfmt/commit/1e016f59490b6b0a76dfb103f11e9bad3387eba6))
+
 ### 1.4.19 (2026-10-28)
 
 ### 1.4.18 (2026-10-28)
