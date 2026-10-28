@@ -27,21 +27,19 @@ const createDebug = require('./lazy')(origDebug)
 
 const LEVELS = ['info', 'warn', 'error']
 
-const disabledDuration = () => true
-disabledDuration.error = disabledDuration
-disabledDuration.info = disabledDuration
-
 const tracksNamespaces = 'namespaces' in origDebug
 
 const memoizeByNamespaces = compute => {
+  // Not a namespaces string, so the first read always misses.
   let namespaces = {}
-  let value
+  let cached
   return () => {
     if (origDebug.namespaces !== namespaces) {
+      // Commit the key after compute so a failed read is tried again.
+      cached = compute()
       namespaces = origDebug.namespaces
-      value = compute()
     }
-    return value
+    return cached
   }
 }
 
@@ -71,14 +69,8 @@ const createLogger = log => {
 module.exports = (env, { levels = LEVELS } = {}) => {
   const debug = createLogger(createDebug(env))
   levels.forEach(level => (debug[level] = createLogger(createDebug(`${env}:${level}`))))
-  const isDisabled =
-    tracksNamespaces && levels.includes('error') && levels.includes('info')
-      ? memoizeByNamespaces(() => !debug.enabled && !debug.error.enabled && !debug.info.enabled)
-      : () => false
 
   debug.duration = (...args) => {
-    if (isDisabled()) return disabledDuration
-
     let duration = debug.enabled ? timeSpan() : undefined
 
     const create =
